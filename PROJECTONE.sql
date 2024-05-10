@@ -107,15 +107,14 @@ JOIN customers c ON o.CustomerID = c.CustomerID;
 
 SELECT * FROM orders
 WHERE OrderID IN (
-    SELECT OrderID
-    FROM orderdetails
-    GROUP BY OrderID
-    HAVING COUNT(DISTINCT ProductID) > 1
+SELECT OrderID
+FROM orderdetails
+GROUP BY OrderID
+HAVING COUNT(DISTINCT ProductID) > 1
 );
 
 -- 2.3
-SELECT CustomerID,
-       SUM(TotalAmount) AS TotalSalesAmount
+SELECT CustomerID, SUM(TotalAmount) AS TotalSalesAmount
 FROM orders
 GROUP BY CustomerID;
 
@@ -134,8 +133,7 @@ SELECT AVG(TotalAmount) AS AverageOrderValue
 FROM orders;
 
 -- 3.3
-SELECT DATE_FORMAT(OrderDate, '%Y-%m') AS Month,
-       COUNT(OrderID) AS TotalOrders
+SELECT DATE_FORMAT(OrderDate, '%Y-%m') AS Month, COUNT(OrderID) AS TotalOrders
 FROM orders
 GROUP BY DATE_FORMAT(OrderDate, '%Y-%m')
 ORDER BY TotalOrders DESC
@@ -169,7 +167,7 @@ LIMIT 3;
 SELECT *
 FROM Orders
 WHERE orderdate >= DATE_SUB(LAST_DAY(CURRENT_DATE), INTERVAL 1 MONTH) + INTERVAL 1 DAY
-  AND orderdate <= LAST_DAY(CURRENT_DATE);
+AND orderdate <= LAST_DAY(CURRENT_DATE);
   
 -- 5.2
 SELECT *
